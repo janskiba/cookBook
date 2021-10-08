@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
+import { DataStorageService } from '../shared/data-storage.service';
 import { AuthorInformationDialogComponent } from "./author-information-dialog/author-information-dialog.component";
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,7 @@ import { AuthorInformationDialogComponent } from "./author-information-dialog/au
 export class NavbarComponent implements OnInit {
   @Input() appTitle = '';
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private dataStorageService: DataStorageService) { }
 
   ngOnInit(): void {
   }
