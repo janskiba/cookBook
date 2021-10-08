@@ -10,12 +10,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AuthorInformationDialogComponent } from './navbar/author-information-dialog/author-information-dialog.component';
+import { RecipesComponent } from './recipes/recipes.component';
+import { RecipeComponent } from './recipes/recipe/recipe.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    AuthorInformationDialogComponent
+    AuthorInformationDialogComponent,
+    RecipesComponent,
+    RecipeComponent
   ],
   imports: [
     BrowserModule,
