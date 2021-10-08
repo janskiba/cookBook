@@ -2,8 +2,33 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: sans-serif;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  a {
+    color: black;
+  }
+}
+
+/* Rules for sizing the material icons. */
+.material-icons.md-18 {
+  font-size: 18px;
+  height: 18px;
+  width: 18px;
+}
+.material-icons.md-24 {
+  font-size: 24px;
+  height: 24px;
+  width: 24px;
+}
+.material-icons.md-36 {
+  font-size: 36px;
+  height: 36px;
+  width: 36px;
+}
