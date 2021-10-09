@@ -1,1 +1,14 @@
-<p>recipes works!</p>
+<div class="column-left">
+  <div class="add-recipe">
+    <button routerLink="/add-recipe">
+      <p>Add a recipe</p>
+      <mat-icon class="material-icons-outlined md-36 icon"
+        >add_circle_outline</mat-icon
+      >
+    </button>
+  </div>
+</div>
+
+<div class="column-right">
+  <router-outlet> </router-outlet>
+</div>
