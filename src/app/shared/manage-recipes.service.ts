@@ -7,11 +7,15 @@ import { Recipe } from './recipe.model';
 })
 
 export class ManageRecipesService {
-  //emmiter to add recipe locally
+  //Subject to add recipe locally
   newRecipe = new Subject<Recipe>();
 
-  //emmiter to delete recipe locally
+  //Subject to delete recipe locally
   removeRecipe = new Subject<string>();
+
+  //Subject to share whole array locally
+  shareRecipes = new Subject<Recipe[]>();
+  private recipes: Recipe[] = [];
 
   constructor() { }
 
@@ -21,5 +25,10 @@ export class ManageRecipesService {
 
   deleteRecipe(id: string) {
     this.removeRecipe.next(id);
+  }
+
+  passRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.shareRecipes.next(this.recipes.slice());
   }
 }

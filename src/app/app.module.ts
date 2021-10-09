@@ -7,6 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,7 +20,7 @@ import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { ConfirmationDialogComponent } from './recipes/confirmation-dialog/confirmation-dialog.component';
 import { InfoDialogComponent } from './recipes/info-dialog/info-dialog.component';
-
+import { SearchFilterPipe } from './recipes/recipe-list/search-filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { InfoDialogComponent } from './recipes/info-dialog/info-dialog.component
     RecipeItemComponent,
     ConfirmationDialogComponent,
     InfoDialogComponent,
+    SearchFilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ import { InfoDialogComponent } from './recipes/info-dialog/info-dialog.component
     MatListModule,
     MatIconModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

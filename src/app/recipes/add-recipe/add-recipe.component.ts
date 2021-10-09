@@ -110,7 +110,6 @@ export class AddRecipeComponent implements OnInit {
 
     this.dataStorageService.createRecipe(recipe).subscribe(res => {
       this.resetForm();
-      console.log(this.ingredientsArray);
       this.manageRecipesService.addRecipe(res);
 
       this.dialog.open(InfoDialogComponent, {

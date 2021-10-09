@@ -13,6 +13,8 @@ import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
 export class RecipeListComponent implements OnInit {
   recipes: Recipe[] = [];
   fetching: boolean = true;
+  public query: string = '';
+  focused: boolean = false;
 
   constructor(private dataStorageService: DataStorageService,
     private changeDetectorRef: ChangeDetectorRef,
@@ -26,6 +28,8 @@ export class RecipeListComponent implements OnInit {
     this.dataStorageService.getRecipes().subscribe(res => {
       this.recipes = res.reverse();
       this.fetching = false;
+      //share array to filter-recipes component
+      this.manageRecipesService.passRecipes(this.recipes);
       this.changeDetectorRef.detectChanges();
     }, err => {
       this.dialog.open(InfoDialogComponent, {
@@ -39,7 +43,9 @@ export class RecipeListComponent implements OnInit {
 
     this.manageRecipesService.newRecipe.subscribe(res => {
       this.recipes.unshift(res);
-      console.log(res);
+
+      //share updated array to filter-recipes component
+      this.manageRecipesService.passRecipes(this.recipes);
       this.changeDetectorRef.detectChanges();
     });
 
@@ -49,7 +55,6 @@ export class RecipeListComponent implements OnInit {
   }
 
   deleteRecipe(id: string) {
-    console.log(id);
     this.recipes.forEach((element, index) => {
       if (element._id === id) this.recipes.splice(index, 1);
       this.changeDetectorRef.detectChanges();
