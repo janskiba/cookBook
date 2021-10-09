@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AuthorInformationDialogComponent } from './navbar/author-information-dialog/author-information-dialog.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeComponent } from './recipes/recipe/recipe.component';
+import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { RecipeComponent } from './recipes/recipe/recipe.component';
     NavbarComponent,
     AuthorInformationDialogComponent,
     RecipesComponent,
-    RecipeComponent
+    RecipeComponent,
+    AddRecipeComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { RecipeComponent } from './recipes/recipe/recipe.component';
     MatButtonModule,
     MatListModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
