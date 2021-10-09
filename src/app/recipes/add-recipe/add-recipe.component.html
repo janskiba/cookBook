@@ -55,8 +55,8 @@
             )
           "
           [disabled]="
-            addRecipeForm.value.ingredientQuantity === '' ||
-            addRecipeForm.value.ingredientName === ''
+            !addRecipeForm.value.ingredientQuantity ||
+            !addRecipeForm.value.ingredientName
           "
         >
           <mat-icon class="material-icons-outlined md-30 icon"
@@ -70,13 +70,16 @@
           <p>{{ ingredient.name }} ({{ ingredient.quantity }})</p>
 
           <div class="buttons">
-            <button class="edit-ingredient">
+            <button class="edit-ingredient" (click)="onUpdate(ingredient)">
               <mat-icon class="material-icons-outlined md-30 icon"
                 >edit_note</mat-icon
               >
             </button>
 
-            <button class="delete-ingredient">
+            <button
+              class="delete-ingredient"
+              (click)="deleteIngredient(ingredient._id)"
+            >
               <mat-icon class="material-icons-outlined md-30 icon"
                 >delete</mat-icon
               >
@@ -92,7 +95,8 @@
       <button
         class="save"
         type="submit"
-        [disabled]="!addRecipeForm.valid && ingredientsArray.length < 2"
+        [disabled]="!addRecipeForm.valid || ingredientsArray.length < 2"
+        (click)="saveRecipe(addRecipeForm)"
       >
         Save
       </button>

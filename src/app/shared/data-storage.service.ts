@@ -4,7 +4,7 @@ import { Recipe } from './recipe.model';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
-  url: string = 'https://crudcrud.com/api/b5e34c342c304f58891e2faf4bf38a22/recipe/';
+  url: string = 'https://crudcrud.com/api/754b0a07995a4515b376049988cf2d87/recipe/';
 
   constructor(private httpClient: HttpClient) { }
 
