@@ -1,10 +1,139 @@
-:host {
+@import "../../../variables";
+
+.add-recipe {
   display: flex;
   flex-direction: column;
   margin-top: 40px;
   align-items: center;
 
-  p {
+  .section-title {
+    font-size: 1.1rem;
     text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+
+  .form-info {
+    font-size: 0.9rem;
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .buttons {
+    text-align: center;
+    .save,
+    .cancel {
+      width: 150px;
+      height: 40px;
+      margin: 0 10px;
+      border: none;
+      border-radius: $input-border-radius;
+      cursor: pointer;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .save {
+      background-color: $succes-color;
+
+      &:disabled,
+      &[disabled] {
+        cursor: default;
+        background-color: #91b08d;
+      }
+    }
+
+    .cancel {
+      background-color: $danger-color;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 10%;
+
+    .ingredients {
+      flex-direction: column;
+      width: 100%;
+
+      .ingredients-list {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 0 0 10px 40%;
+
+        li {
+          display: flex;
+          justify-content: space-between;
+          width: 330px;
+          margin: 0 0 10px 10px;
+          p {
+            margin-right: 20px;
+          }
+
+          .buttons {
+            button {
+              margin-left: 10px;
+              background-color: transparent;
+            }
+          }
+        }
+      }
+    }
+
+    .row,
+    .ingredients .add-ingredient {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 20px;
+
+      .input {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        p {
+          font-size: 0.6rem;
+        }
+      }
+
+      label {
+        width: 40%;
+      }
+
+      input,
+      textarea {
+        height: 35px;
+        border-radius: $input-border-radius;
+        border: $input-border;
+        padding: 10px;
+      }
+
+      textarea {
+        height: 80px;
+      }
+
+      button {
+        cursor: pointer;
+        border: none;
+
+        &:disabled,
+        &[disabled] {
+          cursor: default;
+        }
+      }
+
+      #name,
+      #description {
+        width: 60%;
+      }
+
+      #ingredient-quantity {
+        width: 20%;
+        margin: 0 10px;
+      }
+    }
   }
 }

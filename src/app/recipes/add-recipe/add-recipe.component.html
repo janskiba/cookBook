@@ -1,3 +1,102 @@
 <div class="add-recipe">
-  <p>Add a recipe</p>
+  <p class="section-title">Add a recipe</p>
+
+  <form [formGroup]="addRecipeForm">
+    <div class="row">
+      <label for="name">Name: </label>
+      <input
+        id="name"
+        placeholder="name (min. 3, max. 80 characters)"
+        type="text"
+        formControlName="name"
+      />
+    </div>
+
+    <div class="row">
+      <label for="preparation-time">Preparation time: </label>
+      <input
+        id="preparation-time"
+        placeholder="time (in minutes)"
+        type="number"
+        formControlName="preparationTime"
+      />
+    </div>
+
+    <div class="row">
+      <label for="description">Description: </label>
+      <textarea
+        id="description"
+        type="text"
+        formControlName="description"
+        placeholder="description (min. 15, max. 255 characters)"
+      ></textarea>
+    </div>
+
+    <div class="row ingredients">
+      <div class="add-ingredient">
+        <label for="ingredient-name">Ingredients (min. 2): </label>
+        <input
+          id="ingredient-name"
+          type="text"
+          formControlName="ingredientName"
+          placeholder="ingredient"
+        />
+        <input
+          id="ingredient-quantity"
+          type="text"
+          formControlName="ingredientQuantity"
+          placeholder="quantity"
+        />
+        <button
+          (click)="
+            addIngredient(
+              addRecipeForm.value.ingredientName,
+              addRecipeForm.value.ingredientQuantity
+            )
+          "
+          [disabled]="
+            addRecipeForm.value.ingredientQuantity === '' ||
+            addRecipeForm.value.ingredientName === ''
+          "
+        >
+          <mat-icon class="material-icons-outlined md-30 icon"
+            >add_circle_outline</mat-icon
+          >
+        </button>
+      </div>
+
+      <ul *ngIf="ingredientsArray.length !== 0" class="ingredients-list">
+        <li *ngFor="let ingredient of ingredientsArray">
+          <p>{{ ingredient.name }} ({{ ingredient.quantity }})</p>
+
+          <div class="buttons">
+            <button class="edit-ingredient">
+              <mat-icon class="material-icons-outlined md-30 icon"
+                >edit_note</mat-icon
+              >
+            </button>
+
+            <button class="delete-ingredient">
+              <mat-icon class="material-icons-outlined md-30 icon"
+                >delete</mat-icon
+              >
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <p class="form-info">Complete the form to enable save button.</p>
+
+    <div class="buttons">
+      <button
+        class="save"
+        type="submit"
+        [disabled]="!addRecipeForm.valid && ingredientsArray.length < 2"
+      >
+        Save
+      </button>
+      <button class="cancel" type="submit" (click)="resetForm()">Cancel</button>
+    </div>
+  </form>
 </div>
