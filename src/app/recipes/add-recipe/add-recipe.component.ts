@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { Ingredient } from 'src/app/shared/ingredient.model';
+import { ManageRecipesService } from 'src/app/shared/manage-recipes.service';
 import { Recipe } from 'src/app/shared/recipe.model';
 @Component({
   selector: 'app-add-recipe',
@@ -35,7 +36,10 @@ export class AddRecipeComponent implements OnInit {
   //currently edited ingredient id
   id!: string;
 
-  constructor(private dataStorageService: DataStorageService, private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(
+    private dataStorageService: DataStorageService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private manageRecipesService: ManageRecipesService) { }
 
   ngOnInit(): void {
   }
@@ -103,6 +107,7 @@ export class AddRecipeComponent implements OnInit {
     this.dataStorageService.createRecipe(recipe).subscribe(res => {
       this.resetForm();
       console.log(this.ingredientsArray);
+      this.manageRecipesService.addRecipe(res);
       alert('Recipe added  successfully ');
     },
       err => alert('error occured: ' + err.message),

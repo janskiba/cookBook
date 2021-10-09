@@ -17,6 +17,8 @@ import { RecipeComponent } from './recipes/recipe/recipe.component';
 import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
+import { ConfirmationDialogComponent } from './recipes/confirmation-dialog/confirmation-dialog.component';
+import { InfoDialogComponent } from './recipes/info-dialog/info-dialog.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
     AddRecipeComponent,
     RecipeListComponent,
     RecipeItemComponent,
+    ConfirmationDialogComponent,
+    InfoDialogComponent,
   ],
   imports: [
     BrowserModule,

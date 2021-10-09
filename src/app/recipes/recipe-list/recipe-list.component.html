@@ -1,3 +1,5 @@
+<p *ngIf="fetching">fetching...</p>
+
 <div *ngFor="let el of recipes" class="recipe-item">
   <app-recipe-item [recipe]="el"></app-recipe-item>
 </div>
