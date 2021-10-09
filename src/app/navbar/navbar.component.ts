@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
 import { DataStorageService } from '../shared/data-storage.service';
 import { AuthorInformationDialogComponent } from "./author-information-dialog/author-information-dialog.component";
@@ -6,7 +6,6 @@ import { AuthorInformationDialogComponent } from "./author-information-dialog/au
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent implements OnInit {
   @Input() appTitle = '';

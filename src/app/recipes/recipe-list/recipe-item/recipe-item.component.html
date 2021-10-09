@@ -1,0 +1,13 @@
+<div *ngIf="recipe" class="recipe-preview">
+  <p>{{ recipe.name }}</p>
+
+  <div class="buttons">
+    <button class="edit-ingredient">
+      <mat-icon class="material-icons-outlined md-30 icon">edit_note</mat-icon>
+    </button>
+
+    <button class="delete-ingredient">
+      <mat-icon class="material-icons-outlined md-30 icon">delete</mat-icon>
+    </button>
+  </div>
+</div>

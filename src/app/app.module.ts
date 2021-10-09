@@ -15,6 +15,8 @@ import { AuthorInformationDialogComponent } from './navbar/author-information-di
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeComponent } from './recipes/recipe/recipe.component';
 import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
+import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
+import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
     AuthorInformationDialogComponent,
     RecipesComponent,
     RecipeComponent,
-    AddRecipeComponent
+    AddRecipeComponent,
+    RecipeListComponent,
+    RecipeItemComponent,
   ],
   imports: [
     BrowserModule,
