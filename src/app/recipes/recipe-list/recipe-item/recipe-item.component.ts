@@ -5,6 +5,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
 import { Recipe } from 'src/app/shared/recipe.model';
 import { ManageRecipesService } from 'src/app/shared/manage-recipes.service';
+import { InfoDialogComponent } from '../../info-dialog/info-dialog.component';
 
 @Component({
   selector: 'app-recipe-item',
@@ -31,10 +32,22 @@ export class RecipeItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.dataStorageService.deleteRecipe(id).subscribe(res => {
-          alert('Recipe deleted');
           this.manageRecipesService.deleteRecipe(id);
+          this.dialog.open(InfoDialogComponent, {
+            data: {
+              succes: true,
+              action: 'deleted'
+            }
+          });
+
         }, err => {
-          alert('error occured during deleting. Error message: ' + err.message);
+          this.dialog.open(InfoDialogComponent, {
+            data: {
+              succes: false,
+              errorMessage: err.message,
+              action: 'deleting'
+            }
+          });
         });
       }
       else { return; }

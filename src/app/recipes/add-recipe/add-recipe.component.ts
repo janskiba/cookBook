@@ -1,9 +1,11 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ManageRecipesService } from 'src/app/shared/manage-recipes.service';
 import { Recipe } from 'src/app/shared/recipe.model';
+import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
 @Component({
   selector: 'app-add-recipe',
   templateUrl: './add-recipe.component.html',
@@ -39,7 +41,9 @@ export class AddRecipeComponent implements OnInit {
   constructor(
     private dataStorageService: DataStorageService,
     private changeDetectorRef: ChangeDetectorRef,
-    private manageRecipesService: ManageRecipesService) { }
+    private manageRecipesService: ManageRecipesService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
   }
@@ -108,9 +112,23 @@ export class AddRecipeComponent implements OnInit {
       this.resetForm();
       console.log(this.ingredientsArray);
       this.manageRecipesService.addRecipe(res);
-      alert('Recipe added  successfully ');
+
+      this.dialog.open(InfoDialogComponent, {
+        data: {
+          succes: true,
+          action: 'saved',
+        }
+      });
     },
-      err => alert('error occured: ' + err.message),
+      err => {
+        this.dialog.open(InfoDialogComponent, {
+          data: {
+            succes: false,
+            errorMessage: err.message,
+            action: 'saving'
+          }
+        });
+      },
     );
   }
 }

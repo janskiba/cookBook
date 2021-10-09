@@ -1,1 +1,12 @@
-<p>info-dialog works!</p>
+<div mat-dialog-content *ngIf="data.succes">
+  <p>Recipe succesfully {{ data.action }}</p>
+</div>
+
+<div mat-dialog-content *ngIf="!data.succes">
+  <p>Error occured during {{ data.action }}.</p>
+  <p>Error message: {{ data.errorMessage }}</p>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

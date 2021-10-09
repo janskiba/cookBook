@@ -1,7 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { ManageRecipesService } from 'src/app/shared/manage-recipes.service';
 import { Recipe } from 'src/app/shared/recipe.model';
+import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
 
 @Component({
   selector: 'app-recipe-list',
@@ -14,7 +16,8 @@ export class RecipeListComponent implements OnInit {
 
   constructor(private dataStorageService: DataStorageService,
     private changeDetectorRef: ChangeDetectorRef,
-    private manageRecipesService: ManageRecipesService
+    private manageRecipesService: ManageRecipesService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -25,9 +28,13 @@ export class RecipeListComponent implements OnInit {
       this.fetching = false;
       this.changeDetectorRef.detectChanges();
     }, err => {
-      setTimeout(() => {
-        alert("Error occured during fetching recipes. Error message: " + err.message);
-      }, 500);
+      this.dialog.open(InfoDialogComponent, {
+        data: {
+          succes: false,
+          errorMessage: err.message,
+          action: 'fetching',
+        }
+      });
     });
 
     this.manageRecipesService.newRecipe.subscribe(res => {
