@@ -13,7 +13,7 @@ import { Recipe } from 'src/app/shared/recipe.model';
 export class RecipeComponent implements OnInit, OnDestroy {
 
   recipe!: Recipe;
-  private routeSub: Subscription = new Subscription;
+  private routeSub!: Subscription;
 
   constructor(
     private route: ActivatedRoute,

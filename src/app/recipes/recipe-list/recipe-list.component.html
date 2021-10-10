@@ -4,7 +4,7 @@
 
 <p *ngIf="fetching">loading...</p>
 
-<div class="items" [ngClass]="{ active: focused }">
+<div class="items">
   <div class="recipe-item" *ngFor="let el of recipes | searchFilter: query">
     <app-recipe-item [recipe]="el"></app-recipe-item>
   </div>

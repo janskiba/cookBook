@@ -42,7 +42,7 @@ export class AddRecipeComponent implements OnInit, OnDestroy {
 
   //currently edited ingredient id
   id!: string;
-  private routeSub: Subscription = new Subscription;
+  private routeSub!: Subscription;
 
 
   constructor(
