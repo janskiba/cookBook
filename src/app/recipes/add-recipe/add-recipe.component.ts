@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
   templateUrl: './add-recipe.component.html',
   styleUrls: ['./add-recipe.component.scss'],
 })
-export class AddRecipeComponent implements OnInit, OnDestroy {
+export class AddRecipeComponent implements OnInit {
 
   //component state ('add' or 'edit)
   state: string = 'add';
@@ -69,9 +69,6 @@ export class AddRecipeComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    this.routeSub.unsubscribe();
-  }
 
   changeForm(recipe: Recipe) {
     this.addRecipeForm.patchValue({
@@ -175,7 +172,6 @@ export class AddRecipeComponent implements OnInit, OnDestroy {
       description: formValue.description,
       ingredients: this.ingredientsArray
     };
-    console.log(recipe);
     this.manageRecipesService.updateRecipe(recipe);
   }
 }
