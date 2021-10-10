@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
 import { AuthorInformationDialogComponent } from "./author-information-dialog/author-information-dialog.component";
 @Component({
@@ -6,13 +6,10 @@ import { AuthorInformationDialogComponent } from "./author-information-dialog/au
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   @Input() appTitle = '';
 
   constructor(private dialog: MatDialog) { }
-
-  ngOnInit(): void {
-  }
 
   openDialog() {
     this.dialog.open(AuthorInformationDialogComponent);
