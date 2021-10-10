@@ -21,6 +21,7 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { ConfirmationDialogComponent } from './recipes/confirmation-dialog/confirmation-dialog.component';
 import { InfoDialogComponent } from './recipes/info-dialog/info-dialog.component';
 import { SearchFilterPipe } from './recipes/recipe-list/search-filter.pipe';
+import { PreparationTimePipe } from './recipes/recipe/preparation-time.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { SearchFilterPipe } from './recipes/recipe-list/search-filter.pipe';
     ConfirmationDialogComponent,
     InfoDialogComponent,
     SearchFilterPipe,
+    PreparationTimePipe,
   ],
   imports: [
     BrowserModule,

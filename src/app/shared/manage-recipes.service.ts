@@ -37,6 +37,8 @@ export class ManageRecipesService {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+
+      //if delete is accepted
       if (result) {
         this.dataStorageService.deleteRecipe(id).subscribe(res => {
           this.removeRecipe.next(id);
