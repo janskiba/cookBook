@@ -10,6 +10,11 @@
     border-bottom: 1px solid black;
     padding: 0 5%;
 
+    p {
+      width: 100%;
+      cursor: pointer;
+    }
+
     .buttons {
       display: flex;
       flex-direction: row;
@@ -20,6 +25,15 @@
         border: none;
         cursor: pointer;
         margin-left: 5px;
+        transition: 0.2s ease-in-out;
+
+        &.edit-ingredient:hover {
+          color: $succes-color;
+        }
+
+        &.delete-ingredient:hover {
+          color: $danger-color;
+        }
       }
     }
   }

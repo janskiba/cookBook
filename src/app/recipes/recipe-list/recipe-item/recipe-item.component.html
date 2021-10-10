@@ -1,5 +1,5 @@
 <div *ngIf="recipe" class="recipe-preview">
-  <p>{{ recipe.name }}</p>
+  <p (click)="showRecipe(recipe._id!)">{{ recipe.name }}</p>
 
   <div class="buttons">
     <button class="edit-ingredient">

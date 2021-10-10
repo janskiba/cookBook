@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { MatDialog } from "@angular/material/dialog";
+import { Router } from '@angular/router';
 
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
 import { Recipe } from 'src/app/shared/recipe.model';
@@ -17,40 +18,17 @@ export class RecipeItemComponent implements OnInit {
   @Input() recipe?: Recipe;
 
   constructor(
-    private dataStorageService: DataStorageService,
-    private dialog: MatDialog,
-    private manageRecipesService: ManageRecipesService) { }
+    private manageRecipesService: ManageRecipesService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
 
   deleteRecipe(id: string) {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      id: id
-    });
+    this.manageRecipesService.deleteRecipe(id);
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.dataStorageService.deleteRecipe(id).subscribe(res => {
-          this.manageRecipesService.deleteRecipe(id);
-          this.dialog.open(InfoDialogComponent, {
-            data: {
-              succes: true,
-              action: 'deleted'
-            }
-          });
-
-        }, err => {
-          this.dialog.open(InfoDialogComponent, {
-            data: {
-              succes: false,
-              errorMessage: err.message,
-              action: 'deleting'
-            }
-          });
-        });
-      }
-      else { return; }
-    });
+  showRecipe(recipeId: string) {
+    this.router.navigate(['/recipe', { id: recipeId }]);
   }
 }

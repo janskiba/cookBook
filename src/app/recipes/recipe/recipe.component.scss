@@ -1,0 +1,57 @@
+@import "../../../variables";
+
+:host {
+  display: block;
+  margin-top: 40px;
+  .recipe {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .title {
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .row {
+      display: flex;
+      width: 600px;
+      margin-top: 30px;
+
+      .subtitle {
+        width: 50%;
+      }
+
+      .ingredients {
+        p {
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    .buttons {
+      text-align: center;
+      margin-top: 40px;
+      .edit,
+      .delete {
+        width: 150px;
+        height: 40px;
+        margin: 0 10px;
+        border: none;
+        border-radius: $input-border-radius;
+        cursor: pointer;
+        color: white;
+        font-size: 1rem;
+      }
+
+      .edit {
+        background-color: $succes-color;
+      }
+
+      .delete {
+        background-color: $danger-color;
+      }
+    }
+  }
+}

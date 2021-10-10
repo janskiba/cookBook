@@ -1,1 +1,32 @@
-<p>recipe works!</p>
+<div *ngIf="recipe" class="recipe">
+  <p class="title">{{ recipe.name }} recipe details</p>
+
+  <div class="row">
+    <p class="subtitle">Name:</p>
+    <p>{{ recipe.name }}</p>
+  </div>
+
+  <div class="row">
+    <p class="subtitle">Preparation time:</p>
+    <p>{{ recipe.preparationTime }}</p>
+  </div>
+
+  <div class="row">
+    <p class="subtitle">Description:</p>
+    <p>{{ recipe.description }}</p>
+  </div>
+
+  <div class="row">
+    <p class="subtitle">Ingredients:</p>
+    <div class="ingredients">
+      <p *ngFor="let ingr of recipe.ingredients">
+        - {{ ingr.name }} ({{ ingr.quantity }})
+      </p>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button class="edit">Edit</button>
+    <button class="delete" (click)="delete(recipe._id!)">Delete</button>
+  </div>
+</div>

@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { ConfirmationDialogComponent } from '../recipes/confirmation-dialog/confirmation-dialog.component';
+import { InfoDialogComponent } from '../recipes/info-dialog/info-dialog.component';
+import { DataStorageService } from './data-storage.service';
 import { Recipe } from './recipe.model';
 
 @Injectable({
@@ -17,14 +22,44 @@ export class ManageRecipesService {
   shareRecipes = new Subject<Recipe[]>();
   private recipes: Recipe[] = [];
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog,
+    private dataStorageService: DataStorageService,
+    private router: Router) { }
 
   addRecipe(recipe: Recipe) {
     this.newRecipe.next(recipe);
   }
 
   deleteRecipe(id: string) {
-    this.removeRecipe.next(id);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      id: id
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.dataStorageService.deleteRecipe(id).subscribe(res => {
+          this.removeRecipe.next(id);
+          this.dialog.open(InfoDialogComponent, {
+            data: {
+              succes: true,
+              action: 'deleted'
+            }
+          });
+
+          this.router.navigate(['/add-recipe']);
+        }, err => {
+          this.dialog.open(InfoDialogComponent, {
+            data: {
+              succes: false,
+              errorMessage: err.message,
+              action: 'deleting'
+            }
+          });
+        });
+      }
+      else { return; }
+    });
   }
 
   passRecipes(recipes: Recipe[]) {
