@@ -31,6 +31,7 @@ export class ManageRecipesService {
     this.newRecipe.next(recipe);
   }
 
+
   deleteRecipe(id: string) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       id: id
@@ -64,8 +65,27 @@ export class ManageRecipesService {
     });
   }
 
-  passRecipes(recipes: Recipe[]) {
-    this.recipes = recipes;
-    this.shareRecipes.next(this.recipes.slice());
+  navigateToEdit(recipeId: string) {
+    this.router.navigate(['/edit-recipe', { id: recipeId }]);
   }
+
+  updateRecipe(recipe: Recipe) {
+    this.dataStorageService.updateRecipe(recipe).subscribe(res => {
+      this.dialog.open(InfoDialogComponent, {
+        data: {
+          succes: true,
+          action: 'updated'
+        }
+      });
+    }, err => {
+      this.dialog.open(InfoDialogComponent, {
+        data: {
+          succes: false,
+          errorMessage: err.message,
+          action: 'updating'
+        }
+      });
+    });
+  }
+
 }

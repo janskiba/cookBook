@@ -1,35 +1,47 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, } from '@angular/common/http';
 import { Recipe } from './recipe.model';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
-  apiUrl: string = 'https://crudcrud.com/api/f8ffae73d0cc42eaa9e7e779aafbce51/recipe';
+  apiUrl: string = 'https://crudcrud.com/api/35b17403759140318b9d20f67bf487f2/recipe';
 
 
   constructor(
     private httpClient: HttpClient,
-    // @Inject('https://crudcrud.com/api/9645eda4d9234eeca1349d099cc3390b/recipe') private apiUrl: string
+    // @Inject('https://crudcrud.com/api/9645eda4d9234eeca1349d099cc3390b/recipe.json') private apiUrl: string
   ) {
   }
 
   getRecipes() {
-    return this.httpClient.get<Recipe[]>(`${this.apiUrl}`);
+    return this.httpClient.get<Recipe[]>(`${this.apiUrl}`, {
+      params: new HttpParams().set('X-API-KEY', 'HoA')
+    });
   }
 
   getRecipe(recipeId: string) {
-    return this.httpClient.get<Recipe>(`${this.apiUrl}/${recipeId}`);
+    return this.httpClient.get<Recipe>(`${this.apiUrl}/${recipeId}`, {
+      params: new HttpParams().set('X-API-KEY', 'HoA')
+    }
+    );
   }
 
   createRecipe(recipe: Recipe) {
-    return this.httpClient.post<Recipe>(`${this.apiUrl}`, recipe);
+    return this.httpClient.post<Recipe>(`${this.apiUrl}`, recipe, {
+      params: new HttpParams().set('X-API-KEY', 'HoA')
+    });
   }
 
+
   updateRecipe(updatedRecipe: Recipe) {
-    return this.httpClient.put<Recipe>(`${this.apiUrl}/${updatedRecipe._id}`, updatedRecipe);
+    return this.httpClient.put<Recipe>(`${this.apiUrl}/${updatedRecipe._id}`, updatedRecipe, {
+      params: new HttpParams().set('X-API-KEY', 'HoA')
+    });
   }
 
   deleteRecipe(recipeId: string) {
-    return this.httpClient.delete<Recipe>(`${this.apiUrl}/${recipeId}`);
+    return this.httpClient.delete<Recipe>(`${this.apiUrl}/${recipeId}`, {
+      params: new HttpParams().set('X-API-KEY', 'HoA')
+    });
   }
 }

@@ -2,7 +2,7 @@
   <p (click)="showRecipe(recipe._id!)">{{ recipe.name }}</p>
 
   <div class="buttons">
-    <button class="edit-ingredient">
+    <button class="edit-ingredient" (click)="editRecipe(recipe._id!)">
       <mat-icon class="material-icons-outlined md-30 icon">edit_note</mat-icon>
     </button>
 

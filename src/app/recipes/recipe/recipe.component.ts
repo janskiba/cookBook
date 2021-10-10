@@ -13,7 +13,7 @@ import { Recipe } from 'src/app/shared/recipe.model';
 export class RecipeComponent implements OnInit, OnDestroy {
 
   recipe!: Recipe;
-  private routeSub!: Subscription;
+  private routeSub: Subscription = new Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,4 +40,7 @@ export class RecipeComponent implements OnInit, OnDestroy {
     this.manageRecipesService.deleteRecipe(recipeId);
   }
 
+  navigateToEdit(id: string) {
+    this.manageRecipesService.navigateToEdit(id);
+  }
 }

@@ -19,6 +19,7 @@ export class RecipeItemComponent implements OnInit {
 
   constructor(
     private manageRecipesService: ManageRecipesService,
+    private dataStorageService: DataStorageService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -26,6 +27,10 @@ export class RecipeItemComponent implements OnInit {
 
   deleteRecipe(id: string) {
     this.manageRecipesService.deleteRecipe(id);
+  }
+
+  editRecipe(recipeId: string) {
+    this.manageRecipesService.navigateToEdit(recipeId);
   }
 
   showRecipe(recipeId: string) {

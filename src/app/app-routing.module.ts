@@ -9,7 +9,8 @@ const routes: Routes = [
     path: '', component: RecipesComponent,
     children: [
       { path: 'add-recipe', component: AddRecipeComponent },
-      { path: 'recipe', component: RecipeComponent }
+      { path: 'recipe', component: RecipeComponent },
+      { path: 'edit-recipe', component: AddRecipeComponent }
     ]
   }
 ];

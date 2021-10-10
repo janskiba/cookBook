@@ -1,5 +1,6 @@
 <div class="add-recipe">
-  <p class="section-title">Add a recipe</p>
+  <p *ngIf="state === 'add'" class="section-title">Add a recipe</p>
+  <p *ngIf="state === 'edit'" class="section-title">Edit a recipe</p>
 
   <form [formGroup]="addRecipeForm">
     <div class="row">
@@ -90,9 +91,9 @@
     </div>
 
     <p class="form-info">Complete the form to enable save button.</p>
-
     <div class="buttons">
       <button
+        *ngIf="state === 'add'"
         class="save"
         type="submit"
         [disabled]="!addRecipeForm.valid || ingredientsArray.length < 2"
@@ -100,7 +101,17 @@
       >
         Save
       </button>
-      <button class="cancel" type="submit" (click)="resetForm()">Cancel</button>
+
+      <button
+        *ngIf="state === 'edit'"
+        class="save"
+        type="submit"
+        [disabled]="!addRecipeForm.valid || ingredientsArray.length < 2"
+        (click)="updateRecipe(addRecipeForm)"
+      >
+        Save
+      </button>
+      <button class="cancel" type="button" (click)="resetForm()">Cancel</button>
     </div>
   </form>
 </div>

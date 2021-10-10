@@ -28,8 +28,6 @@ export class RecipeListComponent implements OnInit {
     this.dataStorageService.getRecipes().subscribe(res => {
       this.recipes = res.reverse();
       this.fetching = false;
-      //share array to filter-recipes component
-      this.manageRecipesService.passRecipes(this.recipes);
       this.changeDetectorRef.detectChanges();
     }, err => {
       this.dialog.open(InfoDialogComponent, {
@@ -43,9 +41,6 @@ export class RecipeListComponent implements OnInit {
 
     this.manageRecipesService.newRecipe.subscribe(res => {
       this.recipes.unshift(res);
-
-      //share updated array to filter-recipes component
-      this.manageRecipesService.passRecipes(this.recipes);
       this.changeDetectorRef.detectChanges();
     });
 

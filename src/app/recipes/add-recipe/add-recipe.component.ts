@@ -1,6 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ManageRecipesService } from 'src/app/shared/manage-recipes.service';
@@ -11,7 +13,10 @@ import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
   templateUrl: './add-recipe.component.html',
   styleUrls: ['./add-recipe.component.scss'],
 })
-export class AddRecipeComponent implements OnInit {
+export class AddRecipeComponent implements OnInit, OnDestroy {
+
+  //component state ('add' or 'edit)
+  state: string = 'add';
 
   addRecipeForm = new FormGroup({
     name: new FormControl('', [
@@ -37,21 +42,51 @@ export class AddRecipeComponent implements OnInit {
 
   //currently edited ingredient id
   id!: string;
+  private routeSub: Subscription = new Subscription;
+
 
   constructor(
     private dataStorageService: DataStorageService,
     private changeDetectorRef: ChangeDetectorRef,
     private manageRecipesService: ManageRecipesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    if (this.route.snapshot.routeConfig?.path === 'edit-recipe') {
+      this.routeSub = this.route.params.subscribe(params => {
+        const id = params['id'];
+        this.id = id;
+        this.dataStorageService.getRecipe(id).subscribe(res => {
+          this.changeForm(res);
+          this.state = 'edit';
+          this.ingredientsArray = res.ingredients;
+          this.changeDetectorRef.detectChanges();
+        });
+      });
+    }
+  }
+
+  ngOnDestroy() {
+    this.routeSub.unsubscribe();
+  }
+
+  changeForm(recipe: Recipe) {
+    this.addRecipeForm.patchValue({
+      name: recipe.name,
+      preparationTime: recipe.preparationTime,
+      description: recipe.description,
+    });
   }
 
   resetForm() {
     this.ingredientsArray = [];
     this.addRecipeForm.reset();
     this.changeDetectorRef.detectChanges();
+    if (this.state === 'edit')
+      this.router.navigate(['/add-recipe']);
   }
 
   addIngredient(name: string, quantity: string) {
@@ -107,7 +142,6 @@ export class AddRecipeComponent implements OnInit {
       description: formValue.description,
       ingredients: this.ingredientsArray
     };
-
     this.dataStorageService.createRecipe(recipe).subscribe(res => {
       this.resetForm();
       this.manageRecipesService.addRecipe(res);
@@ -129,5 +163,19 @@ export class AddRecipeComponent implements OnInit {
         });
       },
     );
+  }
+
+  updateRecipe(form: FormGroup) {
+    const formValue = form.value;
+
+    const recipe: Recipe = {
+      _id: this.id,
+      name: formValue.name,
+      preparationTime: formValue.preparationTime,
+      description: formValue.description,
+      ingredients: this.ingredientsArray
+    };
+    console.log(recipe);
+    this.manageRecipesService.updateRecipe(recipe);
   }
 }
